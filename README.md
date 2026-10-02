@@ -24,8 +24,8 @@ but today I build whole products — from the browser to the backend, the cloud 
 - **Frontend & design systems** — React + TypeScript, Zustand / Redux Toolkit, TanStack Query, design tokens, theming, white-label builds, accessible components
 - **Real-time & AI interfaces** — conversational AI, embeddable chat widgets, streaming responses, WebRTC, Unreal Engine Pixel Streaming, voice input
 - **Backend & cloud** — Node.js (Fastify, Express), PostgreSQL / Supabase + Drizzle, OpenAPI, EdDSA-JWT licensing, Cloudflare Workers + R2, Docker, Caddy, Terraform / OpenTofu, sops
-- **Edge & hardware** — Raspberry Pi 5 fleets with SDR-based RF detection across 0–6 GHz, on-device web UIs, device agents with enrollment, telemetry and reverse-SSH access, output over MAVLink, UDP, UART and GPIO
-- **Computer vision** — YOLOv8 drone detection: dataset building with hard negatives, training, int8 compilation for Hailo-8, live camera inference with tracking
+- **Edge & hardware** — Raspberry Pi 5 fleets: on-device services and web UIs, device agents with enrollment, telemetry and reverse-SSH access, integrations over MAVLink, UDP, UART and GPIO
+- **Computer vision** — YOLOv8 object detection: dataset building with hard negatives, training, int8 compilation for Hailo-8, live camera inference with tracking
 - **Release engineering** — signed `.deb` packages and an APT repo, golden SD-card images, Nuitka ARM builds, ~30 GitHub Actions workflows with contract drift checks
 - **Quality as code** — strict TypeScript, ESLint / Stylelint, Vitest + Testing Library + MSW, Playwright, pytest, TS ↔ Python type parity checks
 - **AI-native workflow** — Claude Code agents for audits, refactors and migrations, kept on rails by the checks above
@@ -70,7 +70,6 @@ but today I build whole products — from the browser to the backend, the cloud 
   <img src="https://img.shields.io/badge/OpenTofu-FFDA18?style=flat-square&logo=opentofu&logoColor=black" alt="OpenTofu" />
   <img src="https://img.shields.io/badge/YOLOv8-111F68?style=flat-square&logo=ultralytics&logoColor=white" alt="YOLOv8" />
   <img src="https://img.shields.io/badge/Hailo--8-1F6FEB?style=flat-square" alt="Hailo-8" />
-  <img src="https://img.shields.io/badge/SDR%200%E2%80%936%20GHz-5A2D82?style=flat-square" alt="SDR" />
   <img src="https://img.shields.io/badge/MAVLink-0B7285?style=flat-square" alt="MAVLink" />
   <img src="https://img.shields.io/badge/Debian%20packaging-A81D33?style=flat-square&logo=debian&logoColor=white" alt="Debian packaging" />
   <img src="https://img.shields.io/badge/uv-DE5FE9?style=flat-square&logo=uv&logoColor=white" alt="uv" />
