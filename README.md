@@ -12,7 +12,6 @@
 <p align="center">
   <a href="mailto:hlybchenko@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
   <img src="https://img.shields.io/badge/Kyiv%2C%20Ukraine-0057B7?style=for-the-badge&labelColor=FFD700" alt="Kyiv, Ukraine" />
-  <img src="https://komarev.com/ghpvc/?username=Hlybchenko&label=Profile%20views&color=7f5af0&style=for-the-badge" alt="Profile views" />
 </p>
 
 ---
