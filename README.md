@@ -5,8 +5,6 @@
 
 **Frontend lead for AI products.** React, TypeScript and CSS in depth, plus everything the interface stands on: APIs, vision models, edge devices, release pipelines.
 
-<sub>Most of my work lives in private organization repositories. The stats below count it.</sub>
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/now-dark.svg" />
   <img src="assets/now-light.svg" width="100%" alt="What I build. 01, AI interfaces: frontend lead of a SaaS studio for talking AI avatars, with the dashboard, an embeddable chat widget, Pixel Streaming, white-label theming and the docs; 3.5k+ commits since 2024. 02, edge AI: real-time signal classification from an SDR across 0 to 6 GHz on Raspberry Pi 5, with web UI, fleet backend, device agent, signed .deb packages, an APT repository and golden SD images; 1.8k+ commits in 2026. 03, computer vision: object detection end to end, from dataset curation and YOLO training on CUDA with DVC-versioned data to an exam before every release, int8 builds for Hailo-8 and a modular Rust runtime with an SDK. 04, agentic engineering: Claude Code, Codex, Gemini and Cursor working in parallel on two machines over a tailnet, with my own Claude Code mods, hooks and gates." />
