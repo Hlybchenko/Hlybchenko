@@ -3,7 +3,7 @@
   <img src="assets/hero-light.svg" width="100%" alt="Oleksandr Hlybchenko. Kyiv, Ukraine. Senior frontend lead since 2019: building interfaces for conversational AI avatars, training vision models and shipping them to the edge, React, TypeScript and CSS all the way down, running a multi-agent dev pipeline on two machines." />
 </picture>
 
-**Frontend lead for AI products.** React, TypeScript and CSS in depth, plus everything the interface stands on: APIs, vision models, edge devices, release pipelines.
+**I build the interfaces people use to talk to AI, and the systems that teach machines to see.**
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/now-dark.svg" />

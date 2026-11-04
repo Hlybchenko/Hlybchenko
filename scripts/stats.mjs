@@ -11,7 +11,7 @@ if (!token) {
   process.exit(0);
 }
 
-const query = `query($login:String!){ user(login:$login){ contributionsCollection {
+const query = `query($login:String!){ viewer { login } user(login:$login){ contributionsCollection {
   totalCommitContributions totalPullRequestContributions totalPullRequestReviewContributions
   contributionCalendar { totalContributions }
   commitContributionsByRepository(maxRepositories:100){
@@ -33,6 +33,12 @@ if (scopes === null || !scopes.split(/,\s*/).includes('repo')) {
 }
 const json = await res.json();
 if (!res.ok || json.errors) throw new Error(JSON.stringify(json.errors ?? json));
+// A token of another account sees only public contributions: refuse rather than shrink the card.
+console.log(`Token: ${json.data.viewer.login}, scopes: ${scopes}`);
+if (json.data.viewer.login.toLowerCase() !== LOGIN.toLowerCase()) {
+  console.error(`The token belongs to ${json.data.viewer.login}, not ${LOGIN}.`);
+  process.exit(1);
+}
 const cc = json.data.user.contributionsCollection;
 const repos = cc.commitContributionsByRepository;
 
