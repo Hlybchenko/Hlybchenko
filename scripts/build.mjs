@@ -10,7 +10,7 @@ const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
 
 const TYPED = [
   'building interfaces for conversational AI avatars',
-  'shipping drone detection to Raspberry Pi in the field',
+  'training vision models and shipping them to the edge',
   'React, TypeScript and CSS, all the way down',
   'running a multi-agent dev pipeline on two machines',
 ];
@@ -128,27 +128,27 @@ const CARDS = [
     accent: 'eq',
   },
   {
-    tag: '02 · RF ON THE EDGE',
-    title: 'Drone RF detection on Raspberry Pi 5',
+    tag: '02 · EDGE AI',
+    title: 'Edge AI on Raspberry Pi 5',
     body: [
-      'An SDR sweeps 0–6 GHz, classifies signals and raises',
-      'alerts over MAVLink, UDP, UART and GPIO. On-device',
-      'web UI, fleet backend, device agent, signed .deb',
-      'packages, an APT repository and golden SD images.',
+      'Real-time signal classification from an SDR across',
+      '0–6 GHz, on the device. Web UI, fleet backend,',
+      'device agent, signed .deb packages, an APT',
+      'repository and golden SD images for a fleet.',
     ],
     stat: '1.8k+ commits in 2026',
     accent: 'radar',
   },
   {
-    tag: '03 · DETECTION PLATFORM',
-    title: 'Modular detectors by contract',
+    tag: '03 · COMPUTER VISION',
+    title: 'Vision models, data to device',
     body: [
-      'A Rust platform that runs independently built',
-      'detector modules: contracts, Rust and Python SDK,',
-      'signed objects, device runtime, cloud licensing.',
-      'Camera detector with YOLO models trained on CUDA.',
+      'Object detection end to end: dataset curation,',
+      'YOLO training on CUDA with DVC-versioned data,',
+      'an exam before every release, int8 builds for',
+      'Hailo-8 and a modular Rust runtime with an SDK.',
     ],
-    stat: 'Rust · Python · Hailo · DVC',
+    stat: 'YOLO · CUDA · DVC · Hailo-8 · Rust',
     accent: 'bus',
   },
   {
@@ -228,7 +228,7 @@ ${ACCENTS[c.accent](t, CW - 108, 20)}
 const STACK = [
   ['INTERFACE', ['React', 'TypeScript', 'CSS / SCSS', 'Zustand', 'TanStack Query', 'react-aria', 'i18next', 'Three.js', 'Vite', 'Vitest', 'Playwright']],
   ['PLATFORM', ['Node.js', 'Fastify', 'Express', 'Next.js', 'PostgreSQL', 'Drizzle', 'Prisma', 'Supabase', 'Cloudflare Workers', 'Docker']],
-  ['EDGE & ML', ['Rust', 'Python', 'Raspberry Pi 5', 'SDR', 'MAVLink', 'YOLO', 'Hailo-8', 'CUDA', 'DVC']],
+  ['EDGE & ML', ['Rust', 'Python', 'Raspberry Pi 5', 'SDR', 'YOLO', 'Hailo-8', 'CUDA', 'DVC', 'OpenCV']],
   ['DELIVERY & AI', ['GitHub Actions', 'Debian packaging', 'OpenTofu', 'Tailscale', 'Claude Code', 'Codex', 'Gemini', 'Cursor']],
 ];
 
