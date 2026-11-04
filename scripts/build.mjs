@@ -28,6 +28,10 @@ function typing(t, x0, y, size) {
     now += line.length * ERASE + GAP;
   });
   const T = now;
+  // Start the loop with the first line already typed, so a static first frame still reads.
+  const shift = TYPED[0].length * TYPE;
+  for (const st of steps) st[0] = (st[0] - shift + T) % T;
+  steps.sort((a, b) => a[0] - b[0]);
   const kt = (s) => (s / T).toFixed(5);
   const keyTimes = steps.map(([s]) => kt(s)).join(';');
   const cursorX = steps.map(([, , c]) => (x0 + c * cw).toFixed(1)).join(';');
@@ -36,11 +40,11 @@ function typing(t, x0, y, size) {
 
   const clips = TYPED.map((_, i) => {
     const widths = steps.map(([, l, c]) => (l === i ? (c * cw).toFixed(1) : 0)).join(';');
-    return `<clipPath id="ty${i}"><rect x="${x0}" y="${y - size}" height="${size * 1.4}" width="0">${anim('width', widths)}</rect></clipPath>`;
+    return `<clipPath id="ty${i}"><rect x="${x0}" y="${y - size}" height="${size * 1.4}" width="${i === 0 ? (TYPED[0].length * cw).toFixed(1) : 0}">${anim('width', widths)}</rect></clipPath>`;
   }).join('');
   const texts = TYPED.map((line, i) =>
     `<text x="${x0}" y="${y}" clip-path="url(#ty${i})" class="typed">${esc(line)}</text>`).join('');
-  const cursor = `<rect class="cursor" x="${x0}" y="${y - size * 0.82}" width="${cw * 0.9}" height="${size * 1.05}" rx="2" fill="${t.accent}">${anim('x', cursorX)}</rect>`;
+  const cursor = `<rect class="cursor" x="${(x0 + TYPED[0].length * cw).toFixed(1)}" y="${y - size * 0.82}" width="${cw * 0.9}" height="${size * 1.05}" rx="2" fill="${t.accent}">${anim('x', cursorX)}</rect>`;
   return `<defs>${clips}</defs>${texts}${cursor}`;
 }
 
@@ -59,8 +63,8 @@ function spectrum(t, x0, x1, base) {
       const g = Math.exp(-((x - cx) ** 2) / (2 * sd * sd));
       path += ` L${x.toFixed(1)} ${(base - 4 - h * g - rnd() * 3 * g).toFixed(1)}`;
     }
-    path += ` L${cx + sd * 4} ${base} Z`;
-    return `<path class="peak" style="animation-duration:${d}s;animation-delay:-${(i * 0.7).toFixed(1)}s" d="${path}"/>`;
+    // Fill the closed shape, stroke only the curve, so no line runs along the floor.
+    return `<g class="peak" style="animation-duration:${d}s;animation-delay:-${(i * 0.7).toFixed(1)}s"><path d="${path} L${cx + sd * 4} ${base} Z" fill="url(#area)"/><path d="${path.replace(/^M[^L]+ L/, 'M')}" fill="none" stroke="${t.accent}" stroke-width="1.4"/></g>`;
   }).join('');
   const ticks = [0, 1, 2, 3, 4, 5, 6].map((g) => {
     const x = x0 + (g / 6) * w;
@@ -92,18 +96,16 @@ function hero(t) {
 @keyframes blink{50%{opacity:0}}
 .pulse{animation:pulse 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
 @keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
-.peak{fill:url(#area);stroke:${t.accent};stroke-width:1.4;animation:breathe ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+.peak{animation:breathe ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
 @keyframes breathe{from{transform:scaleY(.55)}to{transform:scaleY(1)}}
 .sweep{animation:sweep 6.5s linear infinite}
-@keyframes sweep{from{transform:translateX(0)}to{transform:translateX(${W - 112 + 140}px)}}
-.rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}}`;
+@keyframes sweep{from{transform:translateX(0)}to{transform:translateX(${W - 112 + 140}px)}}`;
   const body = `${frame(t, W, H, 'hero')}
 <defs><linearGradient id="nameg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${t.accent}"/><stop offset="1" stop-color="${t.accent2}"/></linearGradient></defs>
 <circle cx="62" cy="61" r="5" fill="${t.accent}"/><circle class="pulse" cx="62" cy="61" r="5" fill="${t.accent}"/>
 <text x="80" y="66" class="label">KYIV, UKRAINE  ·  SENIOR FRONTEND LEAD</text>
 <text x="${W - 56}" y="66" class="label" text-anchor="end">SINCE 2019</text>
-<text x="52" y="158" class="name rise">Oleksandr <tspan fill="url(#nameg)">Hlybchenko</tspan></text>
+<text x="52" y="158" class="name">Oleksandr <tspan fill="url(#nameg)">Hlybchenko</tspan></text>
 <text x="56" y="218" class="prompt">$</text>
 ${typing(t, 88, 218, 25)}
 ${spectrum(t, 56, W - 56, 318)}`;
@@ -203,13 +205,11 @@ function now(t) {
 .blip{animation:blip 3s ease-out infinite}
 @keyframes blip{0%,30%{opacity:0}40%{opacity:1}100%{opacity:0}}
 .agent{animation:agent 1.8s ease-in-out infinite}
-@keyframes agent{0%,100%{opacity:.35}50%{opacity:1}}
-.card{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
-@keyframes rise{from{opacity:0;transform:translateY(12px)}}`;
+@keyframes agent{0%,100%{opacity:.35}50%{opacity:1}}`;
   const cards = CARDS.map((c, i) => {
     const x = (i % 2) * (CW + GAP), y = Math.floor(i / 2) * (CH + GAP);
     const lines = c.body.map((l, j) => `<text x="32" y="${124 + j * 25}" class="body">${esc(l)}</text>`).join('');
-    return `<g class="card" style="animation-delay:${(i * 0.12).toFixed(2)}s"><g transform="translate(${x} ${y})">
+    return `<g transform="translate(${x} ${y})">
 ${frame(t, CW, CH, `c${i}`)}
 <text x="32" y="46" class="tag">${esc(c.tag)}</text>
 <text x="32" y="86" class="title">${esc(c.title)}</text>
@@ -217,7 +217,7 @@ ${lines}
 <line x1="32" y1="${CH - 50}" x2="${CW - 32}" y2="${CH - 50}" stroke="${t.stroke}"/>
 <text x="32" y="${CH - 22}" class="stat"><tspan fill="${t.accent}">▸ </tspan>${esc(c.stat)}</text>
 ${ACCENTS[c.accent](t, CW - 108, 20)}
-</g></g>`;
+</g>`;
   }).join('\n');
   const title = CARDS.map((c) => `${c.title}: ${c.body.join(' ')} ${c.stat}.`).join(' ');
   return svg({ width: W, height: H, title, css, body: cards });

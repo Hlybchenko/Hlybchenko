@@ -64,19 +64,17 @@ function card(t) {
 .num{font:800 40px ${SANS};letter-spacing:-1px;fill:${t.text}}
 .cap{font:400 13.5px ${MONO};fill:${t.muted}}
 .lang{font:500 14px ${MONO};fill:${t.text}}
-.pct{font:400 14px ${MONO};fill:${t.muted}}
-.seg{animation:grow 1.1s cubic-bezier(.2,.7,.2,1) both;transform-box:fill-box;transform-origin:0 50%}
-@keyframes grow{from{transform:scaleX(0)}}`;
+.pct{font:400 14px ${MONO};fill:${t.muted}}`;
   const metrics = METRICS.map(([n, cap], i) => {
     const x = 40 + (i % 2) * 270, y = 116 + Math.floor(i / 2) * 92;
     return `<text x="${x}" y="${y}" class="num">${esc(n)}</text><text x="${x}" y="${y + 26}" class="cap">${esc(cap)}</text>`;
   }).join('');
   const BX = 640, BW = W - BX - 40;
   let acc = 0;
-  const segs = top.map((l, i) => {
+  const segs = top.map((l) => {
     const x = BX + acc * BW, w = Math.max(l.p * BW - 3, 2);
     acc += l.p;
-    return `<rect class="seg" style="animation-delay:${(i * 0.08).toFixed(2)}s" x="${x.toFixed(1)}" y="88" width="${w.toFixed(1)}" height="14" rx="4" fill="${l.color ?? t.faint}"/>`;
+    return `<rect x="${x.toFixed(1)}" y="88" width="${w.toFixed(1)}" height="14" rx="4" fill="${l.color ?? t.faint}"/>`;
   }).join('');
   const legend = top.map((l, i) => {
     const x = BX + (i % 2) * 270, y = 146 + Math.floor(i / 2) * 34;
