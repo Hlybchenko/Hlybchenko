@@ -24,6 +24,13 @@ const res = await fetch('https://api.github.com/graphql', {
   headers: { Authorization: `bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'profile-stats' },
   body: JSON.stringify({ query, variables: { login: LOGIN } }),
 });
+// A classic token with the repo scope is the only kind that sees private repositories of several
+// owners at once. Anything else returns public data only, so refuse rather than shrink the card.
+const scopes = res.headers.get('x-oauth-scopes');
+if (scopes === null || !scopes.split(/,\s*/).includes('repo')) {
+  console.error(`Token scopes: ${scopes ?? 'none reported (not a classic PAT)'}. A classic PAT with the repo scope is required.`);
+  process.exit(1);
+}
 const json = await res.json();
 if (!res.ok || json.errors) throw new Error(JSON.stringify(json.errors ?? json));
 const cc = json.data.user.contributionsCollection;
