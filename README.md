@@ -3,9 +3,9 @@
   <img src="assets/hero-light.svg" width="100%" alt="Oleksandr Hlybchenko. Kyiv, Ukraine. Senior frontend lead since 2019: building interfaces for conversational AI avatars, training vision models and shipping them to the edge, React, TypeScript and CSS all the way down, running a multi-agent dev pipeline on two machines." />
 </picture>
 
-I lead frontend on products where the interface is half the story: a production studio for conversational AI avatars, and edge AI that runs on small devices in the field. React, TypeScript and CSS are home ground. Around them I build what the interface needs to be real: the backend, the computer vision models and their training pipeline, the device software and the releases that ship it all.
+**Frontend lead for AI products.** React, TypeScript and CSS in depth, plus everything the interface stands on: APIs, vision models, edge devices, release pipelines.
 
-Most of my work lives in private organization repositories, so the public repos here show only a small part of it. The numbers below count all of it.
+<sub>Most of my work lives in private organization repositories. The stats below count it.</sub>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/now-dark.svg" />
